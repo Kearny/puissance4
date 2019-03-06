@@ -1,0 +1,12 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - App",
+            "request": "launch",
+            "mainClass": "com.kearny.puissance4.App",
+            "projectName": "puissance4",
+            "console": "integratedTerminal"
+        }
+    ]
+}
