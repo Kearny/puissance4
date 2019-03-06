@@ -10,3 +10,5 @@ public class App {
         game.start();
     }
 }
+
+// alias mup="echo -e '\033[44;1;37m     CLEAN + PROCESS-RESOURCES     \033[0m' && mvn clean process-resources -DskipTests=true"
