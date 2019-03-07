@@ -12,18 +12,12 @@ import java.util.function.Consumer;
  * @author <a href="http://tfox.org">Tim Fox</a>
  */
 public class Runner {
-
-    private static final String WEB_EXAMPLES_DIR = "web-examples";
-
-
     public static void run(Class clazz) {
         run("", clazz, new VertxOptions().setClustered(false), null);
     }
 
-    public static void run(String exampleDir, Class clazz, VertxOptions options,
-            DeploymentOptions deploymentOptions) {
-        run(exampleDir + clazz.getPackage().getName().replace(".", "/"), clazz.getName(), options,
-                deploymentOptions);
+    public static void run(String exampleDir, Class clazz, VertxOptions options, DeploymentOptions deploymentOptions) {
+        run(exampleDir + clazz.getPackage().getName().replace(".", "/"), clazz.getName(), options, deploymentOptions);
     }
 
     public static void run(String exampleDir, String verticleID, VertxOptions options,
