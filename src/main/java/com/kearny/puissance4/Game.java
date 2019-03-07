@@ -87,4 +87,8 @@ class Game {
             System.out.println();
         }
     }
+
+    public char[][] getGrid() {
+        return this.grid;
+    }
 }
