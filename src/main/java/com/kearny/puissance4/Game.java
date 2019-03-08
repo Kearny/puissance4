@@ -67,7 +67,7 @@ class Game {
         return placed;
     }
 
-    private void initializeGrid() {
+    public void initializeGrid() {
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < COLUMNS; col++) {
                 grid[row][col] = '_';

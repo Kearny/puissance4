@@ -16,6 +16,7 @@ public class VertxServer extends AbstractVerticle {
     public void start() throws Exception {
         Gson gson = new Gson();
         Game game = new Game();
+        game.initializeGrid();
 
         Router router = Router.router(vertx);
 
@@ -25,6 +26,6 @@ public class VertxServer extends AbstractVerticle {
             );
         });
 
-        vertx.createHttpServer().requestHandler(router).listen(8080);
+        vertx.createHttpServer().requestHandler(router).listen(8085);
     }
 }
