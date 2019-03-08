@@ -21,9 +21,10 @@ public class VertxServer extends AbstractVerticle {
         Router router = Router.router(vertx);
 
         router.route().handler(routingContext -> {
-            routingContext.response().putHeader("content-type", "application/json; charset=utf-8").end(
-                gson.toJson(game.getGrid())
-            );
+            routingContext.response()
+            .putHeader("Access-Control-Allow-Origin", "*")
+            .putHeader("content-type", "application/json; charset=utf-8")
+            .end(gson.toJson(game.getGrid()));
         });
 
         vertx.createHttpServer().requestHandler(router).listen(8085);
