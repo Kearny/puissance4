@@ -56,17 +56,15 @@ public class VertxServer extends AbstractVerticle {
                 throw new IllegalArgumentException("body is null");
             }
 
-            Integer player = responseBody.getInteger("player");
+            PlayerEnum player = PlayerEnum.valueOf(responseBody.getString("player"));
             Integer column = responseBody.getInteger("column");
 
             if (player == null || column == null) {
                 throw new IllegalArgumentException("player or column parameter is null");
             }
 
-            game.placeMoveOnGrid(player, column);
-
             routingContext.response().putHeader("content-type", "application/json; charset=utf-8")
-                    .end(gson.toJson(game.getGrid()));
+                    .end(gson.toJson((game.placeMoveOnGrid(player, column))));
         });
 
         vertx.createHttpServer().requestHandler(router).listen(8085, result -> {

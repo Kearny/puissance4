@@ -1,30 +1,38 @@
 package com.kearny.puissance4;
 
 class Game {
-    private static final int ROWS = 6;
-    private static final int COLUMNS = 7;
+    static final int ROWS = 6;
+    static final int COLUMNS = 7;
 
     private char[][] grid = new char[ROWS][COLUMNS];
 
-    public boolean placeMoveOnGrid(int player, int column) {
+    public MoveResult placeMoveOnGrid(PlayerEnum player, int column) {
+        MoveResult moveResult = new MoveResult();
+
+        // For the player first column is 1
         column = column - 1;
-        boolean placed = false;
 
         for (int i = (ROWS - 1); i >= 0; i--) {
             char c = grid[i][column];
 
             if (c == '_') {
-                if (1 == player)
+                if (PlayerEnum.PLAYER1 == player)
                     grid[i][column] = 'y';
                 else
                     grid[i][column] = 'r';
-                placed = true;
 
                 break;
             }
         }
 
-        return placed;
+        moveResult.grid = this.grid;
+        moveResult.winner = checkWinner();
+
+        return moveResult;
+    }
+
+    private PlayerEnum checkWinner() {
+        return null;
     }
 
     public void initializeGrid() {
@@ -38,4 +46,5 @@ class Game {
     public char[][] getGrid() {
         return this.grid;
     }
+
 }
