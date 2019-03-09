@@ -49,15 +49,18 @@ class Game {
         scanner.close();
     }
 
-    private boolean placeMoveOnGrid(int col, char r) {
-        col = col - 1;
+    public boolean placeMoveOnGrid(int player, int column) {
+        column = column - 1;
         boolean placed = false;
 
         for (int i = (ROWS - 1); i >= 0; i--) {
-            char c = grid[i][col];
+            char c = grid[i][column];
 
             if (c == '_') {
-                grid[i][col] = r;
+                if (1 == player)
+                    grid[i][column] = 'y';
+                else
+                    grid[i][column] = 'r';
                 placed = true;
 
                 break;
