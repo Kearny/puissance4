@@ -1,6 +1,5 @@
 package com.kearny.puissance4.util;
 
-import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
 
@@ -13,15 +12,14 @@ import java.util.function.Consumer;
  */
 public class Runner {
     public static void run(Class clazz) {
-        run("", clazz, new VertxOptions().setClustered(false), null);
+        run(clazz, new VertxOptions().setClustered(false));
     }
 
-    public static void run(String exampleDir, Class clazz, VertxOptions options, DeploymentOptions deploymentOptions) {
-        run(exampleDir + clazz.getPackage().getName().replace(".", "/"), clazz.getName(), options, deploymentOptions);
+    private static void run(Class clazz, VertxOptions options) {
+        run("" + clazz.getPackage().getName().replace(".", "/"), clazz.getName(), options);
     }
 
-    public static void run(String exampleDir, String verticleID, VertxOptions options,
-            DeploymentOptions deploymentOptions) {
+    private static void run(String exampleDir, String verticleID, VertxOptions options) {
         if (options == null) {
             // Default parameter
             options = new VertxOptions();
@@ -44,11 +42,7 @@ public class Runner {
         System.setProperty("vertx.cwd", exampleDir);
         Consumer<Vertx> runner = vertx -> {
             try {
-                if (deploymentOptions != null) {
-                    vertx.deployVerticle(verticleID, deploymentOptions);
-                } else {
-                    vertx.deployVerticle(verticleID);
-                }
+                vertx.deployVerticle(verticleID);
             } catch (Throwable t) {
                 t.printStackTrace();
             }

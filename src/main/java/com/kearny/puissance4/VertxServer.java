@@ -1,11 +1,7 @@
 package com.kearny.puissance4;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.google.gson.Gson;
 import com.kearny.puissance4.util.Runner;
-
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.http.HttpMethod;
@@ -14,14 +10,17 @@ import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
 import io.vertx.ext.web.handler.CorsHandler;
 
-public class VertxServer extends AbstractVerticle {
+import java.util.HashSet;
+import java.util.Set;
+
+class VertxServer extends AbstractVerticle {
 
     public static void main(String[] args) {
         Runner.run(VertxServer.class);
     }
 
     @Override
-    public void start(Future<Void> future) throws Exception {
+    public void start(Future<Void> future) {
         Gson gson = new Gson();
         Game game = new Game();
         game.initializeGrid();
@@ -59,7 +58,7 @@ public class VertxServer extends AbstractVerticle {
             PlayerEnum player = PlayerEnum.valueOf(responseBody.getString("player"));
             Integer column = responseBody.getInteger("column");
 
-            if (player == null || column == null) {
+            if (column == null) {
                 throw new IllegalArgumentException("player or column parameter is null");
             }
 
