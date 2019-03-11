@@ -18,7 +18,7 @@
         <tbody v-if="grid != null">
           <tr v-for="(row, rowIndex) in grid" :key="rowIndex">
             <td v-for="(col, colIndex) in row" :key=" colIndex">
-              <span class="content" v-if="col != '_'" :class="col == 'y' ? 'yellow' : 'red'"></span>
+              <span class="content" v-if="col != 0" :class="col == '1' ? 'yellow' : 'red'"></span>
             </td>
           </tr>
         </tbody>
