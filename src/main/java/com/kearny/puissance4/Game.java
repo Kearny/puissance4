@@ -16,8 +16,8 @@ class Game {
             int value = grid[i][column];
 
             if (value == 0) {
-                grid[i][column] = player.getValue();
-
+                    grid[i][column] = player.getValue();
+               
                 break;
             }
         }
@@ -39,12 +39,12 @@ class Game {
     private boolean checkVertical(int player, int col) {
         int count = 0;
         for (int i = 0; i < ROWS; i++) {
-            if (grid[i][col] == player)
+            if(grid[i][col] == player)
                 count++;
             else
                 count = 0;
 
-            if (count == 4) {
+            if(count == 4){
                 return true;
             }
         }
@@ -54,12 +54,12 @@ class Game {
     void initializeGrid() {
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < COLUMNS; col++) {
-                grid[row][col] = '_';
+                grid[row][col] = 0;
             }
         }
     }
 
-    public int[][] getGrid() {
+    int[][] getGrid() {
         return this.grid;
     }
 
