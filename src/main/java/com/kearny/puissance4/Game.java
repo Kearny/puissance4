@@ -33,21 +33,21 @@ class Game {
 
   private boolean checkWinConditions(int player, int column) {
     return checkVertical(player, column);
-
   }
 
   private boolean checkVertical(int player, int col) {
     int count = 0;
     for (int i = 0; i < ROWS; i++) {
-      if(grid[i][col] == player)
+      if (grid[i][col] == player)
         count++;
       else
         count = 0;
 
-      if(count == 4){
+      if (count == 4) {
         return true;
       }
     }
+
     return false;
   }
 

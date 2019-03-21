@@ -18,11 +18,6 @@ public class Runner {
   }
 
   private static void run(String exampleDir, String verticleID, VertxOptions options) {
-    if (options == null) {
-      // Default parameter
-      options = new VertxOptions();
-    }
-
     // Smart cwd detection
     System.setProperty("vertx.cwd", exampleDir);
     Consumer<Vertx> runner = vertx -> {
@@ -32,18 +27,8 @@ public class Runner {
         t.printStackTrace();
       }
     };
-    if (options.isClustered()) {
-      Vertx.clusteredVertx(options, res -> {
-        if (res.succeeded()) {
-          Vertx vertx = res.result();
-          runner.accept(vertx);
-        } else {
-          res.cause().printStackTrace();
-        }
-      });
-    } else {
-      Vertx vertx = Vertx.vertx(options);
-      runner.accept(vertx);
-    }
+
+    Vertx vertx = Vertx.vertx(options);
+    runner.accept(vertx);
   }
 }

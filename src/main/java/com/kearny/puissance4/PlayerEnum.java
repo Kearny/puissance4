@@ -13,5 +13,4 @@ enum PlayerEnum {
   public int getValue() {
     return value;
   }
-
 }

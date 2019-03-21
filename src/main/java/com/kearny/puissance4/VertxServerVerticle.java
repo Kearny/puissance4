@@ -49,21 +49,18 @@ public class VertxServerVerticle extends AbstractVerticle {
     });
 
     router.post("/").handler(routingContext -> {
-      JsonObject responseBody = routingContext.getBodyAsJson();
+      try {
+        JsonObject responseBody = routingContext.getBodyAsJson();
 
-      if (responseBody == null) {
-        throw new IllegalArgumentException("body is null");
+        PlayerEnum player = PlayerEnum.valueOf(responseBody.getString("player"));
+        Integer column = responseBody.getInteger("column");
+
+        routingContext.response().putHeader("content-type", "application/json; charset=utf-8")
+          .end(gson.toJson((game.placeMoveOnGrid(player, column))));
+
+      } catch (Exception e) {
+        throw new IllegalArgumentException("Can't read body.");
       }
-
-      PlayerEnum player = PlayerEnum.valueOf(responseBody.getString("player"));
-      Integer column = responseBody.getInteger("column");
-
-      if (column == null) {
-        throw new IllegalArgumentException("player or column parameter is null");
-      }
-
-      routingContext.response().putHeader("content-type", "application/json; charset=utf-8")
-        .end(gson.toJson((game.placeMoveOnGrid(player, column))));
     });
 
     vertx.createHttpServer().requestHandler(router).listen(8085, result -> {
@@ -74,5 +71,4 @@ public class VertxServerVerticle extends AbstractVerticle {
       }
     });
   }
-
 }
